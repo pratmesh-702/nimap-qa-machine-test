@@ -1,0 +1,169 @@
+{
+  "info": {
+    "_postman_id": "697cc20e-0246-47ef-8779-586a37147a1a",
+    "name": "Nimap",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "58021795",
+    "_collection_link": "https://go.postman.co/collection/58021795-697cc20e-0246-47ef-8779-586a37147a1a?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Requests",
+      "item": [
+        {
+          "name": "Login with valid credentials",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Success is true\", function () {\r\n    pm.expect(pm.response.json().success).to.be.true;\r\n});\r\n\r\npm.test(\"Email is correct\", function () {\r\n    const email = pm.response.json().userDetail.data.Email;\r\n    pm.expect(email).to.eql(\"moreprath1999@gmail.com\");\r\n});\r\n\r\n// Fetch token and set collection variable\r\nconst responseData = pm.response.json();\r\nconst authToken = responseData.referralToken || responseData.token;\r\n\r\nif (authToken) {\r\n    pm.collectionVariables.set(\"basic_auth_0lde\", authToken);\r\n}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    username:\"{{username}}\", \r\n    password: \"{{password}}\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BaseUrl}}/api/account/authenticate",
+              "host": [
+                "{{BaseUrl}}"
+              ],
+              "path": [
+                "api",
+                "account",
+                "authenticate"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login with Invalid credentials",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Success is true\", function () {\r\n    pm.expect(pm.response.json().success).to.be.true;\r\n});\r\n\r\npm.test(\"Email is correct\", function () {\r\n    const email = pm.response.json().userDetail.data.Email;\r\n    pm.expect(email).to.eql(\"moreprath1999@gmail.com\");\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{username: \"moreprath1999@gmail.com\", password: \"prathmesh712\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BaseUrl}}/api/account/authenticate",
+              "host": [
+                "{{BaseUrl}}"
+              ],
+              "path": [
+                "api",
+                "account",
+                "authenticate"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add Customer",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Basic bW9yZXByYXRoMTk5OUBnbWFpbC5jb206cHJhdGhtZXNoNzAy"
+              },
+              {
+                "key": "content-type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"LeadId\":0,\"IsVisibleToAll\":false,\"LeadName\":\"New1\",\"RefNo\":\"\",\"ReferredBy\":0,\"PersonName\":\"\",\"MobileNo\":\"\",\"ContactNo\":\"\",\"Email\":\"\",\"PersonDesignation\":\"\",\"PersonLocation\":\"\",\"Address\":\"\",\"CountryId\":0,\"StateId\":0,\"CityId\":0,\"LocalityId\":0,\"PinCode\":\"\",\"LeadSourceId\":0,\"LeadStageId\":0,\"TerritoryId\":0,\"Website\":\"\",\"OtherInfo\":\"\",\"LeadTypeId\":0,\"ParentLeadId\":0,\"FrontView\":\"\",\"BackView\":\"\",\"CustomFieldValues\":[],\"LeadTags\":[],\"Longitude\":0,\"Latitude\":0,\"LeadContacts\":[]}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BaseUrl}}/api/CRM/Lead",
+              "host": [
+                "{{BaseUrl}}"
+              ],
+              "path": [
+                "api",
+                "CRM",
+                "Lead"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "basic_auth_0lde",
+      "secret": true
+    },
+    {
+      "key": "username",
+      "value": ""
+    },
+    {
+      "key": "password",
+      "value": ""
+    }
+  ]
+}
