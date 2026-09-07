@@ -1,0 +1,220 @@
+{
+  "info": {
+    "_postman_id": "a160df5d-4723-4a9d-b7b2-6bfa20d8924c",
+    "name": "Nimap",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "53430734"
+  },
+  "item": [
+    {
+      "name": "New Folder",
+      "item": [
+        {
+          "name": "Login with valid credentials",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Success is true\", function () {\r",
+                  "    pm.expect(pm.response.json().success).to.be.true;\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Email is correct\", function () {\r",
+                  "    const email = pm.response.json().userDetail.data.Email;\r",
+                  "    pm.expect(email).to.eql(\"moreprath1999@gmail.com\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{auth_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{username: \"moreprath1999@gmail.com\", password: \"prathmesh702\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://test.fieldforceconnect.com/api/account/authenticate",
+              "protocol": "https",
+              "host": [
+                "test",
+                "fieldforceconnect",
+                "com"
+              ],
+              "path": [
+                "api",
+                "account",
+                "authenticate"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login with Invalid credentials",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Success is true\", function () {\r",
+                  "    pm.expect(pm.response.json().success).to.be.true;\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Email is correct\", function () {\r",
+                  "    const email = pm.response.json().userDetail.data.Email;\r",
+                  "    pm.expect(email).to.eql(\"moreprath1999@gmail.com\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{username: \"moreprath1999@gmail.com\", password: \"prathmesh712\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://test.fieldforceconnect.com/api/account/authenticate",
+              "protocol": "https",
+              "host": [
+                "test",
+                "fieldforceconnect",
+                "com"
+              ],
+              "path": [
+                "api",
+                "account",
+                "authenticate"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Add Customer",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{auth_secret_0lde}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "{{basic_auth_0lde}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"companyName\": \"Test Company\",\r\n  \"contactPerson\": \"Prathamesh\",\r\n  \"mobile\": \"9876543210\",\r\n  \"emailID\": \"testcustomer@gmail.com\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/api/customer/add",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "customer",
+            "add"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{basic_auth_0lde}}",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "auth_secret_0lde",
+      "secret": true
+    },
+    {
+      "key": "basic_auth_0lde",
+      "secret": true
+    }
+  ]
+}
